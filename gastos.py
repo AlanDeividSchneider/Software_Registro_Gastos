@@ -1,17 +1,21 @@
-
 import tkinter as tk
-from tkinter import messagebox, ttk
 import pyodbc
 import datetime
+import os
+from tkinter import messagebox, ttk
 from tkcalendar import Calendar
+from dotenv import load_dotenv
+
+# Carrega as variáveis de ambiente do arquivo .env
+load_dotenv()
 
 # --- Configurações do Banco de Dados ---
 DB_CONFIG = {
-    'driver': '{ODBC Driver 17 for SQL Server}', # Pode variar dependendo da sua instalação
-    'server': '127.0.0.1',                       # Ex: 'localhost\\SQLEXPRESS' ou 'MEU_SERVIDOR'
-    'database': 'GASTOS',                        # Ex: 'MinhaEmpresaDB'
-    'uid': 'sa',                                 # Ex: 'sa'
-    'pwd': '12345678'                            # Ex: 'MinhaSenhaForte123'
+    'driver': os.getenv('DB_DRIVER'),
+    'server': os.getenv('DB_SERVER'),
+    'database': os.getenv('DB_DATABASE'),
+    'uid': os.getenv('DB_UID'),
+    'pwd': os.getenv('DB_PWD')
 }
 
 def conectar_bd():
