@@ -9,7 +9,7 @@ from tkcalendar import Calendar
 DB_CONFIG = {
     'driver': '{ODBC Driver 17 for SQL Server}', # Pode variar dependendo da sua instalação
     'server': '127.0.0.1',                       # Ex: 'localhost\\SQLEXPRESS' ou 'MEU_SERVIDOR'
-    'database': 'GASTOS',                        # Ex: 'MinhaEmpresaDB'
+    'database': 'GASTOS_HOM',                        # Ex: 'MinhaEmpresaDB'
     'uid': 'sa',                                 # Ex: 'sa'
     'pwd': '12345678'                            # Ex: 'MinhaSenhaForte123'
 }
@@ -327,7 +327,7 @@ def show_compras_screen(content_frame):
     #Exibe a tela do menu 'Compras' com suas sub-opções.
     clear_frame(content_frame) # Limpa o frame para o conteúdo de Compras
     
-    label_title = tk.Label(content_frame, text="Menu Compras", font=("Arial", 16, "bold"))
+    label_title = tk.Label(content_frame, text="Compras", font=("Arial", 16, "bold"))
     label_title.pack(pady=10)
 
     # Sub-opções para nova compra
@@ -339,7 +339,7 @@ def show_compras_screen(content_frame):
     btn_alterar_compra.pack(pady=10)
 
     # Botão para voltar ao menu principal
-    btn_voltar = tk.Button(content_frame, text="Voltar ao Menu Principal", command=lambda: show_main_menu(content_frame.master), width=20, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_main_menu(content_frame.master), width=20, height=2)
     btn_voltar.pack(pady=10)
 
 def show_alterar_compra(content_frame):
@@ -454,7 +454,7 @@ def show_alterar_compra(content_frame):
             specific_compra6_frame.pack(pady=5, padx=50, side="top") 
 
             # --- Seleção de Usuário ---
-            label_usuario = tk.Label(specific_compra1_frame, text="Usuário que pagou:")
+            label_usuario = tk.Label(specific_compra1_frame, text="Usuário:")
             label_usuario.pack(pady=5)
             # Carrega os usuários do banco de dados
             usuarios_data = get_usuarios_db() # Lista de (ID, NOME)
@@ -482,7 +482,7 @@ def show_alterar_compra(content_frame):
             combobox_tipo_gasto.set(tipo_gasto_retorno.get()) # Texto padrão
 
             # --- Seleção do local de gasto ---
-            label_local_gasto = tk.Label(specific_compra2_frame, text="Local da compra:")
+            label_local_gasto = tk.Label(specific_compra2_frame, text="Local:")
             label_local_gasto.pack(pady=5,)
             # Carrega os locais de gasto do banco de dados
             local_gasto_data = get_local_gasto_db()
@@ -538,19 +538,19 @@ def show_alterar_compra(content_frame):
             combobox_cartao.set(cartao_retorno.get()) # Texto padrão
 
             # --- Entrada de Valor ---
-            label_valor = tk.Label(specific_compra4_frame, text="Valor da Compra:")
+            label_valor = tk.Label(specific_compra4_frame, text="Valor:")
             label_valor.pack(pady=5)
             entry_valor = tk.Entry(specific_compra4_frame, width=40, textvariable=valor_retorno)
             entry_valor.pack(pady=5)
 
             # --- Entrada de Descrição ---
-            label_descricao = tk.Label(specific_compra4_frame, text="Descrição da Compra:")
+            label_descricao = tk.Label(specific_compra4_frame, text="Descrição:")
             label_descricao.pack(pady=5)
             entry_descricao = tk.Entry(specific_compra4_frame, width=40, textvariable=observacao_retorno)
             entry_descricao.pack(pady=5)
 
             # --- Calendário para Data da Compra ---
-            label_data = tk.Label(specific_compra6_frame, text="Data da Compra:")
+            label_data = tk.Label(specific_compra6_frame, text="Data:")
             label_data.pack(pady=5)
             
             # Cria o widget de calendário
@@ -732,10 +732,6 @@ def show_alterar_compra(content_frame):
     btn_voltar = tk.Button(botoes_frame, text="Voltar", command=lambda: show_compras_screen(content_frame), width=20, height=2)
     btn_voltar.pack(side='left', padx=5)
 
-    
-
-    
-
 def show_nova_compra(content_frame):
     #Exibe a tela para registrar uma nova compra.
     clear_frame(content_frame)
@@ -762,7 +758,7 @@ def show_nova_compra(content_frame):
     specific_compra6_frame.pack(pady=25, padx=50, side="top") 
 
     # --- Seleção de Usuário ---
-    label_usuario = tk.Label(specific_compra1_frame, text="Usuário que pagou:")
+    label_usuario = tk.Label(specific_compra1_frame, text="Usuário:")
     label_usuario.pack(pady=5)
     # Carrega os usuários do banco de dados
     usuarios_data = get_usuarios_db() # Lista de (ID, NOME)
@@ -790,7 +786,7 @@ def show_nova_compra(content_frame):
     combobox_tipo_gasto.set("Selecione") # Texto padrão
 
     # --- Seleção do local de gasto ---
-    label_local_gasto = tk.Label(specific_compra2_frame, text="Local da compra:")
+    label_local_gasto = tk.Label(specific_compra2_frame, text="Local:")
     label_local_gasto.pack(pady=5,)
     # Carrega os locais de gasto do banco de dados
     local_gasto_data = get_local_gasto_db()
@@ -846,19 +842,19 @@ def show_nova_compra(content_frame):
     combobox_cartao.set("Selecione") # Texto padrão
 
     # --- Entrada de Valor ---
-    label_valor = tk.Label(specific_compra4_frame, text="Valor da Compra:")
+    label_valor = tk.Label(specific_compra4_frame, text="Valor:")
     label_valor.pack(pady=5)
     entry_valor = tk.Entry(specific_compra4_frame, width=40)
     entry_valor.pack(pady=5)
 
     # --- Entrada de Descrição ---
-    label_descricao = tk.Label(specific_compra4_frame, text="Descrição da Compra:")
+    label_descricao = tk.Label(specific_compra4_frame, text="Descrição:")
     label_descricao.pack(pady=5)
     entry_descricao = tk.Entry(specific_compra4_frame, width=40)
     entry_descricao.pack(pady=5)
 
     # --- Calendário para Data da Compra ---
-    label_data = tk.Label(specific_compra6_frame, text="Data da Compra:")
+    label_data = tk.Label(specific_compra6_frame, text="Data:")
     label_data.pack(pady=5)
     
     # Cria o widget de calendário
@@ -1000,10 +996,10 @@ def show_nova_compra(content_frame):
     specific_compra5_frame.pack(pady=5, padx=50) 
 
     # Botão para salvar
-    btn_salvar = tk.Button(specific_compra5_frame, text="Salvar Compra", command=on_salvar_compra, width=25, height=2)
+    btn_salvar = tk.Button(specific_compra5_frame, text="Salvar", command=on_salvar_compra, width=25, height=2)
     btn_salvar.pack(pady=10, padx=10, side="left")
     # Botão para voltar ao menu de compras
-    btn_voltar = tk.Button(specific_compra5_frame, text="Voltar para Compras", command=lambda: show_compras_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(specific_compra5_frame, text="Voltar", command=lambda: show_compras_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=10, padx=10, side="left")
    
 def show_cadastros_screen(content_frame):
@@ -1013,31 +1009,31 @@ def show_cadastros_screen(content_frame):
     label_title.pack(pady=20)
 
     # Sub-opções para cadastro de usuário
-    btn_cadastro_usuario = tk.Button(content_frame, text="Cadastrar Usuário", command=lambda: show_cadastrar_usuario(content_frame), width=25, height=2)
+    btn_cadastro_usuario = tk.Button(content_frame, text="Usuário", command=lambda: show_cadastrar_usuario(content_frame), width=25, height=2)
     btn_cadastro_usuario.pack(pady=5)
 
     # Sub-opções para cadastro de tipo de gasto
-    btn_cadastro_tipo_gasto = tk.Button(content_frame, text="Cadastrar tipo de gasto", command=lambda: show_cadastrar_tipo_gasto(content_frame), width=25, height=2)
+    btn_cadastro_tipo_gasto = tk.Button(content_frame, text="Tipo de gasto", command=lambda: show_cadastrar_tipo_gasto(content_frame), width=25, height=2)
     btn_cadastro_tipo_gasto.pack(pady=5)
 
     # Sub-opções para cadastro de local de gasto
-    btn_cadastro_local_gasto = tk.Button(content_frame, text="Cadastrar local de compra", command=lambda: show_cadastrar_local_gasto(content_frame), width=25, height=2)
+    btn_cadastro_local_gasto = tk.Button(content_frame, text="Local", command=lambda: show_cadastrar_local_gasto(content_frame), width=25, height=2)
     btn_cadastro_local_gasto.pack(pady=5)
 
     # Sub-opções para cadastro de tipo de pagamento
-    btn_cadastro_tipo_pagamento = tk.Button(content_frame, text="Cadastrar tipo de pagamento", command=lambda: show_cadastrar_tipo_pagamento(content_frame), width=25, height=2)
+    btn_cadastro_tipo_pagamento = tk.Button(content_frame, text="Tipo de pagamento", command=lambda: show_cadastrar_tipo_pagamento(content_frame), width=25, height=2)
     btn_cadastro_tipo_pagamento.pack(pady=5)
 
     # Sub-opções para cadastro de metodo de pagamento
-    btn_cadastro_metodo_pagamento = tk.Button(content_frame, text="Cadastrar metodo de pagamento", command=lambda: show_cadastrar_metodo_pagamento(content_frame), width=25, height=2)
+    btn_cadastro_metodo_pagamento = tk.Button(content_frame, text="Metodo de pagamento", command=lambda: show_cadastrar_metodo_pagamento(content_frame), width=25, height=2)
     btn_cadastro_metodo_pagamento.pack(pady=5)
 
     # Sub-opções para cadastro de cartão
-    btn_cadastro_cartao = tk.Button(content_frame, text="Cadastrar cartão", command=lambda: show_cadastrar_cartao(content_frame), width=25, height=2)
+    btn_cadastro_cartao = tk.Button(content_frame, text="Cartão", command=lambda: show_cadastrar_cartao(content_frame), width=25, height=2)
     btn_cadastro_cartao.pack(pady=5)
 
     # Botão para voltar ao menu principal
-    btn_voltar = tk.Button(content_frame, text="Voltar ao Menu Principal", command=lambda: show_main_menu(content_frame.master), width=25, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_main_menu(content_frame.master), width=25, height=2)
     btn_voltar.pack(pady=25)
 
 def show_cadastrar_usuario(content_frame):
@@ -1047,7 +1043,7 @@ def show_cadastrar_usuario(content_frame):
     label_title = tk.Label(content_frame, text="Cadastrar Usuário", font=("Arial", 14, "bold"))
     label_title.pack(pady=10)
     # Dados de entrada do usuário
-    label_nome = tk.Label(content_frame, text="Nome do usuário:")
+    label_nome = tk.Label(content_frame, text="Nome:")
     label_nome.pack(pady=5)
     entry_nome = tk.Entry(content_frame, width=40)
     entry_nome.pack(pady=5)
@@ -1063,18 +1059,18 @@ def show_cadastrar_usuario(content_frame):
             entry_nome.delete(0, tk.END) 
 
     # Botão para adicionar usuário
-    btn_adicionar = tk.Button(content_frame, text="Adicionar", command=on_adicionar_usuario, width=25, height=2)
+    btn_adicionar = tk.Button(content_frame, text="Salvar", command=on_adicionar_usuario, width=25, height=2)
     btn_adicionar.pack(pady=10)
 
     # Botão para voltar para a tela de Compras
-    btn_voltar = tk.Button(content_frame, text="Voltar para Configurações", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=5)
 
 def show_cadastrar_tipo_gasto(content_frame):
     #Exibe o formulário para registrar um novo tipo de gasto sub-opção de Configurações.
     clear_frame(content_frame) # Limpa o frame para o formulário
 
-    label_title = tk.Label(content_frame, text="Cadastrar tipo de gasto", font=("Arial", 14, "bold"))
+    label_title = tk.Label(content_frame, text="Cadastrar Tipo De Gasto", font=("Arial", 14, "bold"))
     label_title.pack(pady=10)
     # Dados de entrada do tipo de gasto
     label_nome_tipo_gasto = tk.Label(content_frame, text="Tipo de gasto:")
@@ -1093,21 +1089,21 @@ def show_cadastrar_tipo_gasto(content_frame):
             entry_nome_tipo_gasto.delete(0, tk.END) 
 
     # Botão para adicionar o tipo de gasto
-    btn_adicionar = tk.Button(content_frame, text="Adicionar", command=on_adicionar_tipo_gasto, width=25, height=2)
+    btn_adicionar = tk.Button(content_frame, text="Salvar", command=on_adicionar_tipo_gasto, width=25, height=2)
     btn_adicionar.pack(pady=10)
 
     # Botão para voltar para a tela de Compras
-    btn_voltar = tk.Button(content_frame, text="Voltar para Configurações", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=5)
 
 def show_cadastrar_local_gasto(content_frame):
     #Exibe o formulário para registrar um novo local de gasto sub-opção de Configurações.
     clear_frame(content_frame) # Limpa o frame para o formulário
 
-    label_title = tk.Label(content_frame, text="Cadastrar local de compra", font=("Arial", 14, "bold"))
+    label_title = tk.Label(content_frame, text="Cadastrar Local De Compra", font=("Arial", 14, "bold"))
     label_title.pack(pady=10)
     # Dados de entrada do local de gasto
-    label_nome_local_gasto = tk.Label(content_frame, text="Local de compra:")
+    label_nome_local_gasto = tk.Label(content_frame, text="Local:")
     label_nome_local_gasto.pack(pady=5)
     entry_nome_local_gasto = tk.Entry(content_frame, width=40)
     entry_nome_local_gasto.pack(pady=5)
@@ -1123,18 +1119,18 @@ def show_cadastrar_local_gasto(content_frame):
             entry_nome_local_gasto.delete(0, tk.END) 
 
     # Botão para adicionar Local de gasto
-    btn_adicionar = tk.Button(content_frame, text="Adicionar", command=on_adicionar_local_gasto, width=25, height=2)
+    btn_adicionar = tk.Button(content_frame, text="Salvar", command=on_adicionar_local_gasto, width=25, height=2)
     btn_adicionar.pack(pady=10)
 
     # Botão para voltar para a tela de Compras
-    btn_voltar = tk.Button(content_frame, text="Voltar para Configurações", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=5)
 
 def show_cadastrar_tipo_pagamento(content_frame):
     #Exibe o formulário para registrar um novo tipo de pagamento sub-opção de Configurações.
     clear_frame(content_frame) # Limpa o frame para o formulário
 
-    label_title = tk.Label(content_frame, text="Cadastrar tipo de pagamento", font=("Arial", 14, "bold"))
+    label_title = tk.Label(content_frame, text="Cadastrar Tipo De Pagamento", font=("Arial", 14, "bold"))
     label_title.pack(pady=10)
     # Dados de entrada do tipo de pagamento
     label_nome_tipo_pagamento = tk.Label(content_frame, text="Tipo de pagamento:")
@@ -1154,18 +1150,18 @@ def show_cadastrar_tipo_pagamento(content_frame):
             entry_nome_tipo_pagamento.delete(0, tk.END) 
 
     # Botão para adicionar tipo de pagamento
-    btn_adicionar = tk.Button(content_frame, text="Adicionar", command=on_adicionar_tipo_pagamento, width=25, height=2)
+    btn_adicionar = tk.Button(content_frame, text="Salvar", command=on_adicionar_tipo_pagamento, width=25, height=2)
     btn_adicionar.pack(pady=10)
 
     # Botão para voltar para a tela de Compras
-    btn_voltar = tk.Button(content_frame, text="Voltar para Configurações", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=5)
 
 def show_cadastrar_metodo_pagamento(content_frame):
     #Exibe o formulário para registrar um novo metodo de pagamento sub-opção de Configurações.
     clear_frame(content_frame) # Limpa o frame para o formulário
 
-    label_title = tk.Label(content_frame, text="Cadastrar metodo de pagamento", font=("Arial", 14, "bold"))
+    label_title = tk.Label(content_frame, text="Cadastrar Metodo De Pagamento", font=("Arial", 14, "bold"))
     label_title.pack(pady=10)
     # Dados de entrada do metodo de pagamento
     label_nome_metodo_pagamento = tk.Label(content_frame, text="Metodo de pagamento:")
@@ -1184,25 +1180,25 @@ def show_cadastrar_metodo_pagamento(content_frame):
             entry_nome_metodo_pagamento.delete(0, tk.END) 
 
     # Botão adicionar metodos de pagamento
-    btn_adicionar = tk.Button(content_frame, text="Adicionar", command=on_adicionar_metodo_pagamento, width=25, height=2)
+    btn_adicionar = tk.Button(content_frame, text="Salvar", command=on_adicionar_metodo_pagamento, width=25, height=2)
     btn_adicionar.pack(pady=10)
 
     # Botão para voltar para a tela de Compras
-    btn_voltar = tk.Button(content_frame, text="Voltar para Configurações", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=5)
 
 def show_cadastrar_cartao(content_frame):
     #Exibe o formulário para registrar um novo cartão sub-opção de Configurações.
     clear_frame(content_frame) # Limpa o frame para o formulário
 
-    label_title = tk.Label(content_frame, text="Cadastrar cartão", font=("Arial", 14, "bold"))
+    label_title = tk.Label(content_frame, text="Cadastrar Cartão", font=("Arial", 14, "bold"))
     label_title.pack(pady=10)
     # Dados de entrada do cartão
-    label_nome_cartao = tk.Label(content_frame, text="Nome do cartão:")
+    label_nome_cartao = tk.Label(content_frame, text="Nome:")
     label_nome_cartao.pack(pady=5)
     entry_nome_cartao = tk.Entry(content_frame, width=40)
     entry_nome_cartao.pack(pady=5)
-    label_bandeira_cartao = tk.Label(content_frame, text="Bandeira do cartão:")
+    label_bandeira_cartao = tk.Label(content_frame, text="Bandeira:")
     label_bandeira_cartao.pack(pady=5)
     entry_bandeira_cartao = tk.Entry(content_frame, width=40)
     entry_bandeira_cartao.pack(pady=5)
@@ -1220,42 +1216,42 @@ def show_cadastrar_cartao(content_frame):
             entry_bandeira_cartao.delete(0, tk.END) 
 
     # Botão adicionar cartão
-    btn_adicionar = tk.Button(content_frame, text="Adicionar", command=on_adicionar_cartao, width=25, height=2)
+    btn_adicionar = tk.Button(content_frame, text="Salvar", command=on_adicionar_cartao, width=25, height=2)
     btn_adicionar.pack(pady=10)
 
     # Botão para voltar para a tela de Compras
-    btn_voltar = tk.Button(content_frame, text="Voltar para Configurações", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_cadastros_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=5)
 
 def show_relatorios_screen(content_frame):
     #Exibe a tela do menu 'Relatórios'.
     clear_frame(content_frame)
-    label_title = tk.Label(content_frame, text="Menu Relatórios", font=("Arial", 16, "bold"))
+    label_title = tk.Label(content_frame, text="Relatórios", font=("Arial", 16, "bold"))
     label_title.pack(pady=20)
     
     # Sub-opções relatório completo por data e usuário
-    btn_completo_data = tk.Button(content_frame, text="Relatório por data e usuário", command=lambda: show_completo_data_usuario(content_frame), width=25, height=2)
+    btn_completo_data = tk.Button(content_frame, text="Data e usuário", command=lambda: show_completo_data_usuario(content_frame), width=25, height=2)
     btn_completo_data.pack(pady=5)
 
     # Sub-opções relatório completo por data
-    btn_completo_data = tk.Button(content_frame, text="Relatório por data", command=lambda: show_completo_data(content_frame), width=25, height=2)
+    btn_completo_data = tk.Button(content_frame, text="Data", command=lambda: show_completo_data(content_frame), width=25, height=2)
     btn_completo_data.pack(pady=5)
 
     # Botão para voltar ao menu principal
-    btn_voltar = tk.Button(content_frame, text="Voltar ao Menu Principal", command=lambda: show_main_menu(content_frame.master), width=25, height=2)
+    btn_voltar = tk.Button(content_frame, text="Voltar", command=lambda: show_main_menu(content_frame.master), width=25, height=2)
     btn_voltar.pack(pady=20)
 
 def show_completo_data_usuario(content_frame):
     clear_frame(content_frame)
 
-    label_title = tk.Label(content_frame, text="Relatório por data", font=("Arial", 16, "bold"))
+    label_title = tk.Label(content_frame, text="Relatório Por Data e Usuário", font=("Arial", 16, "bold"))
     label_title.pack(pady=10)
 
     specific_dat_frame = tk.Frame(content_frame)
     specific_dat_frame.pack(pady=5, anchor='w', padx=50) 
 
     # --- Seleção de Usuário ---
-    label_usuario = tk.Label(specific_dat_frame, text="Usuário que pagou:")
+    label_usuario = tk.Label(specific_dat_frame, text="Usuário:")
     label_usuario.pack(pady=5, side="left", padx=10)
     usuarios_data = get_usuarios_db()
     usuarios_nomes = [user[1] for user in usuarios_data]
@@ -1265,13 +1261,13 @@ def show_completo_data_usuario(content_frame):
     combobox_usuario.set("Selecione")
 
     # --- Entrada de Data da Compra (Manual) ---
-    label_data_inicio = tk.Label(specific_dat_frame, text="Data de Início (DD/MM/AAAA):")
+    label_data_inicio = tk.Label(specific_dat_frame, text="Data início:")
     label_data_inicio.pack(pady=5, side="left", padx=10)
     entry_data_inicio = tk.Entry(specific_dat_frame, width=40)
     entry_data_inicio.pack(pady=5, side="left", padx=10)
     entry_data_inicio.insert(0, datetime.datetime.now().strftime("%d/%m/%Y"))
 
-    label_data_fim = tk.Label(specific_dat_frame, text="Data de Fim (DD/MM/AAAA):")
+    label_data_fim = tk.Label(specific_dat_frame, text="Data fim:")
     label_data_fim.pack(pady=5, side="left", padx=10)
     entry_data_fim = tk.Entry(specific_dat_frame, width=40)
     entry_data_fim.pack(pady=5, side="left", padx=10)
@@ -1281,7 +1277,7 @@ def show_completo_data_usuario(content_frame):
     specific_value_frame.pack(pady=5, anchor='w', padx=50) 
 
     # --- Seleção do tipo de gasto ---
-    label_tipo_gasto = tk.Label(specific_value_frame, text="Total Gasto em:")
+    label_tipo_gasto = tk.Label(specific_value_frame, text="Total gasto 01:")
     label_tipo_gasto.pack(pady=5, side="left", padx=10)
     # Carrega os tipos de gasto do banco de dados
     tipo_gasto_data = get_tipo_gasto_db()
@@ -1295,7 +1291,7 @@ def show_completo_data_usuario(content_frame):
     combobox_tipo_gasto.set("Selecione") # Texto padrão
 
     # --- Seleção do tipo de gasto ---
-    label_tipo_gasto2 = tk.Label(specific_value_frame, text="Total Gasto em:")
+    label_tipo_gasto2 = tk.Label(specific_value_frame, text="Total gasto 02:")
     label_tipo_gasto2.pack(pady=5, side="left", padx=10)
     # Carrega os tipos de gasto do banco de dados
     tipo_gasto_data2 = get_tipo_gasto_db()
@@ -1309,7 +1305,7 @@ def show_completo_data_usuario(content_frame):
     combobox_tipo_gasto2.set("Selecione") # Texto padrão
 
     # --- Seleção do tipo de gasto ---
-    label_tipo_gasto3 = tk.Label(specific_value_frame, text="Total Gasto em:")
+    label_tipo_gasto3 = tk.Label(specific_value_frame, text="Total gasto 03:")
     label_tipo_gasto3.pack(pady=5, side="left", padx=10)
     # Carrega os tipos de gasto do banco de dados
     tipo_gasto_data3 = get_tipo_gasto_db()
@@ -1323,7 +1319,7 @@ def show_completo_data_usuario(content_frame):
     combobox_tipo_gasto3.set("Selecione") # Texto padrão
 
     # --- Seleção do tipo de gasto ---
-    label_tipo_gasto4 = tk.Label(specific_value_frame, text="Total Gasto em:")
+    label_tipo_gasto4 = tk.Label(specific_value_frame, text="Total gasto 04:")
     label_tipo_gasto4.pack(pady=5, side="left", padx=10)
     # Carrega os tipos de gasto do banco de dados
     tipo_gasto_data4 = get_tipo_gasto_db()
@@ -1341,7 +1337,7 @@ def show_completo_data_usuario(content_frame):
     report_frame.pack(pady=10, fill=tk.BOTH, expand=True)
 
     # Definir colunas da Treeview
-    columns = ("ID", "Data Gasto", "Valor Gasto", "Tipo Gasto", "Local Gasto", "Tipo Pagamento", "Usuário Pagou", "Método Pagamento", "Cartão", "Descrição")
+    columns = ("ID", "Data", "Valor", "Tipo de gasto", "Local", "Tipo pagamento", "Usuário", "Método pagamento", "Cartão", "Descrição")
     tree = ttk.Treeview(report_frame, columns=columns, show="headings")
 
     # Configurar cabeçalhos das colunas
@@ -1416,19 +1412,19 @@ def show_completo_data_usuario(content_frame):
             return
         
         if tipo_gasto_filtro1 == "Selecione":
-            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um tipo de gasto no filtro 01.")
+            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um total gasto 01.")
             return
         
         if tipo_gasto_filtro2 == "Selecione":
-            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um tipo de gasto no filtro 02.")
+            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um total gasto 02.")
             return
         
         if tipo_gasto_filtro3 == "Selecione":
-            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um tipo de gasto no filtro 03.")
+            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um total gasto 03.")
             return
         
         if tipo_gasto_filtro4 == "Selecione":
-            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um tipo de gasto no filtro 04.")
+            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um total gasto 04.")
             return
 
         id_usuario_selecionado = None
@@ -1504,35 +1500,34 @@ def show_completo_data_usuario(content_frame):
                     messagebox.showwarning("Erro de Valor", f"Valor inválido encontrado: {formatted_row_data[2]}. Ignorando para o total.")
             
             # Atualiza o Label com o valor total formatado
-            label_total_gasto.config(text=f"Total Gasto: R$ {total_gasto:.2f}".replace('.', ','))
-            label_total_filtro01.config(text=f"Total Gasto em {tipo_gasto_filtro1}: R$ {total_filtro1_saida:.2f}".replace('.', ','))
-            label_total_filtro02.config(text=f"Total Gasto em {tipo_gasto_filtro2}: R$ {total_filtro2_saida:.2f}".replace('.', ','))
-            label_total_filtro03.config(text=f"Total Gasto em {tipo_gasto_filtro3}: R$ {total_filtro3_saida:.2f}".replace('.', ','))
-            label_total_filtro04.config(text=f"Total Gasto em {tipo_gasto_filtro4}: R$ {total_filtro4_saida:.2f}".replace('.', ','))
+            label_total_gasto.config(text=f"Total: R$ {total_gasto:.2f}".replace('.', ','))
+            label_total_filtro01.config(text=f"Total gasto em {tipo_gasto_filtro1.lower()}: R$ {total_filtro1_saida:.2f}".replace('.', ','))
+            label_total_filtro02.config(text=f"Total gasto em {tipo_gasto_filtro2.lower()}: R$ {total_filtro2_saida:.2f}".replace('.', ','))
+            label_total_filtro03.config(text=f"Total gasto em {tipo_gasto_filtro3.lower()}: R$ {total_filtro3_saida:.2f}".replace('.', ','))
+            label_total_filtro04.config(text=f"Total gasto em {tipo_gasto_filtro4.lower()}: R$ {total_filtro4_saida:.2f}".replace('.', ','))
 
-    btn_salvar = tk.Button(specific_dat_frame, text="Gerar relatório", command=on_consulta_usu_data, width=25, height=2)
+    btn_salvar = tk.Button(specific_dat_frame, text="Buscar", command=on_consulta_usu_data, width=25, height=2)
     btn_salvar.pack(pady=10, side="left", padx=10)
-    btn_voltar = tk.Button(specific_dat_frame, text="Voltar para relatórios", command=lambda: show_relatorios_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(specific_dat_frame, text="Voltar", command=lambda: show_relatorios_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=10, side="left", padx=10)
-
 
 def show_completo_data(content_frame):
     clear_frame(content_frame)
 
-    label_title = tk.Label(content_frame, text="Relatório por data", font=("Arial", 16, "bold"))
+    label_title = tk.Label(content_frame, text="Relatório Por Data", font=("Arial", 16, "bold"))
     label_title.pack(pady=10)
 
     specific_dat_frame = tk.Frame(content_frame)
     specific_dat_frame.pack(pady=5, anchor='w', padx=50) 
 
     # --- Entrada de Data da Compra (Manual) ---
-    label_data_inicio = tk.Label(specific_dat_frame, text="Data de Início (DD/MM/AAAA):")
+    label_data_inicio = tk.Label(specific_dat_frame, text="Data início:")
     label_data_inicio.pack(pady=5, side="left", padx=10)
     entry_data_inicio = tk.Entry(specific_dat_frame, width=40)
     entry_data_inicio.pack(pady=5, side="left", padx=10)
     entry_data_inicio.insert(0, datetime.datetime.now().strftime("%d/%m/%Y"))
 
-    label_data_fim = tk.Label(specific_dat_frame, text="Data de Fim (DD/MM/AAAA):")
+    label_data_fim = tk.Label(specific_dat_frame, text="Data fim:")
     label_data_fim.pack(pady=5, side="left", padx=10)
     entry_data_fim = tk.Entry(specific_dat_frame, width=40)
     entry_data_fim.pack(pady=5, side="left", padx=10)
@@ -1542,7 +1537,7 @@ def show_completo_data(content_frame):
     specific_value_frame.pack(pady=5, anchor='w', padx=50) 
 
     # --- Seleção do tipo de gasto ---
-    label_tipo_gasto = tk.Label(specific_value_frame, text="Total Gasto em:")
+    label_tipo_gasto = tk.Label(specific_value_frame, text="Total gasto 01:")
     label_tipo_gasto.pack(pady=5, side="left", padx=10)
     # Carrega os tipos de gasto do banco de dados
     tipo_gasto_data = get_tipo_gasto_db()
@@ -1556,7 +1551,7 @@ def show_completo_data(content_frame):
     combobox_tipo_gasto.set("Selecione") # Texto padrão
 
     # --- Seleção do tipo de gasto ---
-    label_tipo_gasto2 = tk.Label(specific_value_frame, text="Total Gasto em:")
+    label_tipo_gasto2 = tk.Label(specific_value_frame, text="Total gasto 02:")
     label_tipo_gasto2.pack(pady=5, side="left", padx=10)
     # Carrega os tipos de gasto do banco de dados
     tipo_gasto_data2 = get_tipo_gasto_db()
@@ -1570,7 +1565,7 @@ def show_completo_data(content_frame):
     combobox_tipo_gasto2.set("Selecione") # Texto padrão
 
     # --- Seleção do tipo de gasto ---
-    label_tipo_gasto3 = tk.Label(specific_value_frame, text="Total Gasto em:")
+    label_tipo_gasto3 = tk.Label(specific_value_frame, text="Total gasto 03:")
     label_tipo_gasto3.pack(pady=5, side="left", padx=10)
     # Carrega os tipos de gasto do banco de dados
     tipo_gasto_data3 = get_tipo_gasto_db()
@@ -1584,7 +1579,7 @@ def show_completo_data(content_frame):
     combobox_tipo_gasto3.set("Selecione") # Texto padrão
 
     # --- Seleção do tipo de gasto ---
-    label_tipo_gasto4 = tk.Label(specific_value_frame, text="Total Gasto em:")
+    label_tipo_gasto4 = tk.Label(specific_value_frame, text="Total gasto 04:")
     label_tipo_gasto4.pack(pady=5, side="left", padx=10)
     # Carrega os tipos de gasto do banco de dados
     tipo_gasto_data4 = get_tipo_gasto_db()
@@ -1602,7 +1597,7 @@ def show_completo_data(content_frame):
     report_frame.pack(pady=10, fill=tk.BOTH, expand=True)
 
     # Definir colunas da Treeview
-    columns = ("ID", "Data Gasto", "Valor Gasto", "Tipo Gasto", "Local Gasto", "Tipo Pagamento", "Usuário Pagou", "Método Pagamento", "Cartão", "Descrição")
+    columns = ("ID", "Data", "Valor", "Tipo de gasto", "Local", "Tipo pagamento", "Usuário pagou", "Método pagamento", "Cartão", "Descrição")
     tree = ttk.Treeview(report_frame, columns=columns, show="headings")
 
     # Configurar cabeçalhos das colunas
@@ -1672,19 +1667,19 @@ def show_completo_data(content_frame):
         tipo_gasto_filtro4 = selected_tipo_gasto_nome4.get()
 
         if tipo_gasto_filtro1 == "Selecione":
-            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um tipo de gasto no filtro 01.")
+            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um total gasto 01.")
             return
         
         if tipo_gasto_filtro2 == "Selecione":
-            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um tipo de gasto no filtro 02.")
+            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um total gasto 02.")
             return
         
         if tipo_gasto_filtro3 == "Selecione":
-            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um tipo de gasto no filtro 03.")
+            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um total gasto 03.")
             return
         
         if tipo_gasto_filtro4 == "Selecione":
-            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um tipo de gasto no filtro 04.")
+            messagebox.showwarning("Seleção Inválida", "Por favor, selecione um total gasto 04.")
             return
 
         try:
@@ -1749,17 +1744,16 @@ def show_completo_data(content_frame):
                     messagebox.showwarning("Erro de Valor", f"Valor inválido encontrado: {formatted_row_data[2]}. Ignorando para o total.")
             
             # Atualiza o Label com o valor total formatado
-            label_total_gasto.config(text=f"Total Gasto: R$ {total_gasto:.2f}".replace('.', ','))
-            label_total_filtro01.config(text=f"Total Gasto em {tipo_gasto_filtro1}: R$ {total_filtro1_saida:.2f}".replace('.', ','))
-            label_total_filtro02.config(text=f"Total Gasto em {tipo_gasto_filtro2}: R$ {total_filtro2_saida:.2f}".replace('.', ','))
-            label_total_filtro03.config(text=f"Total Gasto em {tipo_gasto_filtro3}: R$ {total_filtro3_saida:.2f}".replace('.', ','))
-            label_total_filtro04.config(text=f"Total Gasto em {tipo_gasto_filtro4}: R$ {total_filtro4_saida:.2f}".replace('.', ','))
+            label_total_gasto.config(text=f"Total: R$ {total_gasto:.2f}".replace('.', ','))
+            label_total_filtro01.config(text=f"Total gasto em {tipo_gasto_filtro1.lower()}: R$ {total_filtro1_saida:.2f}".replace('.', ','))
+            label_total_filtro02.config(text=f"Total gasto em {tipo_gasto_filtro2.lower()}: R$ {total_filtro2_saida:.2f}".replace('.', ','))
+            label_total_filtro03.config(text=f"Total gasto em {tipo_gasto_filtro3.lower()}: R$ {total_filtro3_saida:.2f}".replace('.', ','))
+            label_total_filtro04.config(text=f"Total gasto em {tipo_gasto_filtro4.lower()}: R$ {total_filtro4_saida:.2f}".replace('.', ','))
 
-    btn_salvar = tk.Button(specific_dat_frame, text="Gerar relatório", command=on_consulta_data, width=25, height=2)
+    btn_salvar = tk.Button(specific_dat_frame, text="Buscar", command=on_consulta_data, width=25, height=2)
     btn_salvar.pack(pady=10, side="left", padx=10)
-    btn_voltar = tk.Button(specific_dat_frame, text="Voltar para relatórios", command=lambda: show_relatorios_screen(content_frame), width=25, height=2)
+    btn_voltar = tk.Button(specific_dat_frame, text="Voltar", command=lambda: show_relatorios_screen(content_frame), width=25, height=2)
     btn_voltar.pack(pady=10, side="left", padx=10)
-
 
 # --- Classe Principal da Aplicação Tkinter ---
 class MainApplication(tk.Tk):
