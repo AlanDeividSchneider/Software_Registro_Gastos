@@ -9,7 +9,7 @@ from tkcalendar import Calendar
 DB_CONFIG = {
     'driver': '{ODBC Driver 17 for SQL Server}', # Pode variar dependendo da sua instalação
     'server': '127.0.0.1',                       # Ex: 'localhost\\SQLEXPRESS' ou 'MEU_SERVIDOR'
-    'database': 'GASTOS_HOM',                        # Ex: 'MinhaEmpresaDB'
+    'database': 'GASTOS',                        # Ex: 'MinhaEmpresaDB'
     'uid': 'sa',                                 # Ex: 'sa'
     'pwd': '12345678'                            # Ex: 'MinhaSenhaForte123'
 }
